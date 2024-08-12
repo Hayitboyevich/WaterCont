@@ -15,7 +15,8 @@ class RoleSeeder extends Seeder
     {
         Role::query()->create(['name' => 'Admin']);
         Role::query()->create(['name' => 'Kadr']);
-        Role::query()->create(['name' => 'Hududiy Inspeksiya']);
+        Role::query()->create(['name' => 'Hududiy Inspeksiya boshligi']);
         Role::query()->create(['name' => 'Inspektor']);
+        Role::query()->create(['name' => 'Operator']);
     }
 }

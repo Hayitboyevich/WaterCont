@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('phone')->unique();
             $table->bigInteger('pinfl')->unique();
+            $table->string('position')->nullable();
             $table->boolean('status')->default(false);
             $table->foreignId('role_id')->constrained();
             $table->foreignId('region_id')->nullable()->constrained();

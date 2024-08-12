@@ -54,5 +54,7 @@ class UserSeeder extends Seeder
             'region_id' => 1,
             'password' => Hash::make(998911234564)
         ]);
+
+
     }
 }

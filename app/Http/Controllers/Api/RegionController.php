@@ -29,7 +29,7 @@ class RegionController extends BaseController
 
             if (request()->has('district_id')) {
                 $district = District::query()->findOrFail(request('district_id'));
-                return $this->sendSuccess(DistrictResource::make($district), 'All regions');
+                return $this->sendSuccess(DistrictResource::make($district), 'District');
             }
 
             return $this->sendError('No district found', 'No region found');
