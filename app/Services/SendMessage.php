@@ -15,7 +15,7 @@ class SendMessage
         $data = [
             'login' => config('services.sms_provider.login'),
             'password' => config('services.sms_provider.password'),
-            'nickname' => config('services.sms_provider.nickname'),
+//            'nickname' => config('services.sms_provider.nickname'),
             'data' => json_encode([[
                 'phone' => $this->phone,
                 'text' => $this->message
