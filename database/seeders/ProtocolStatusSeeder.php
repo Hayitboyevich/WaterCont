@@ -16,7 +16,8 @@ class ProtocolStatusSeeder extends Seeder
         $meta = [
             'Yangi',
             'Qayta yuborilgan',
-            'Rad etilgan'
+            'Rad etilgan',
+            'Qabul qilingan'
         ];
 
         foreach ($meta as  $value) {

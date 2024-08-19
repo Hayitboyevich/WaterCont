@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('region_id')->constrained();
             $table->foreignId('district_id')->constrained();
+            $table->foreignId('protocol_status_id')->constrained();
             $table->text('address');
             $table->double('long');
             $table->double('lat');
@@ -35,6 +36,7 @@ return new class extends Migration
             $table->text('rejected_comment')->nullable();
             $table->integer('rejected_by')->nullable();
             $table->date('rejected_at')->nullable();
+            $table->date('accepted_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
