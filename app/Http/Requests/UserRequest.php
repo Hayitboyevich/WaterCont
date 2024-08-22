@@ -12,7 +12,7 @@ class UserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::user()->isManager;
+        return Auth::user()->isManager();
     }
 
     /**
@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'middle_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|regex:/^998\d{9}$/',
+            'phone' => 'required|regex:/^998\d{9}$/|unique:users,phone',
             'position' => 'required|string|max:255',
             "pinfl" => "required|integer|digits:14",
             "role_id" => "required|integer|exists:roles,id",
