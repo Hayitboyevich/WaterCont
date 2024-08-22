@@ -13,5 +13,11 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'api/send-sms',
+        'api/login',
+        'api/users/create',
+        'api/protocols/create',
+        'api/protocols/edit',
+        'api/protocols/reject',
+        'api/protocols/confirm',
     ];
 }
