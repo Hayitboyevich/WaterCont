@@ -22,7 +22,7 @@ trait UserRoleTrait
         return $this->role_id == RoleEnum::REGIONAL_INSPECTION;
     }
 
-    public function isIsnpector(): bool
+    public function isInspector(): bool
     {
         return $this->role_id == RoleEnum::INSPECTOR;
     }
