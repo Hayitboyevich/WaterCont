@@ -104,12 +104,15 @@ class UserController extends BaseController
         }
     }
 
-    public function operators()
+
+    public function delete(): JsonResponse
     {
         try {
-            $users = User::query()->where('role_id', 2)->get();
+            $user = User::query()->findOrFail(request('id'));
+            $user->delete();
 
-        } catch (\Exception $exception) {
+            return $this->sendSuccess([], 'User deleted successfully.');
+        }catch (\Exception $exception){
             return $this->sendError($exception->getMessage());
         }
     }

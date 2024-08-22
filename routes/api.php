@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth:api']], function() {
 
     Route::get('users', [UserController::class, 'index']);
     Route::post('users/create', [UserController::class, 'create']);
+    Route::post('users-delete', [UserController::class, 'delete']);
+
 
     Route::get('roles', [RoleController::class, 'index']);
 
