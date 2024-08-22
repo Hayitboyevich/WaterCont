@@ -13,6 +13,12 @@ class RegionController extends BaseController
     public function getRegions(): JsonResponse
     {
         try {
+            $id = request('id');
+            if ($id)
+            {
+                $region = Region::query()->findOrFail($id);
+                return $this->sendSuccess(RegionResource::make($region), 'Region retrieved successfully.');
+            }
             return $this->sendSuccess(RegionResource::collection(Region::all()), 'All regions');
         }catch (\Exception $exception){
             return $this->sendError($exception->getMessage(), $exception->getCode());
