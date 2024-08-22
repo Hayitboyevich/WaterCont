@@ -51,6 +51,7 @@ class UserController extends BaseController
                 'pinfl' => $request->input('pinfl'),
                 'role_id' => $request->input('role_id'),
                 'region_id' => $request->input('region_id'),
+                'address' => $request->input('address'),
                 'password' => Hash::make($request->input('phone')),
             ]);
 
