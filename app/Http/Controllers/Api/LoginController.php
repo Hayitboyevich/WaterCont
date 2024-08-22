@@ -51,7 +51,7 @@ class LoginController extends BaseController
             ]);
         }
 
-        if ($smsCode->code !== $code) {
+        if ($smsCode->code != $code) {
             throw ValidationException::withMessages([
                 'code' => ['Kiritilgan SMS kodi noto‘g‘ri.']
             ]);

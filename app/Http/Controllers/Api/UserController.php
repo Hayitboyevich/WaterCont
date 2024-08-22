@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SmsRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Region;
 use App\Models\SmsMessage;
 use App\Models\User;
 use App\Services\SendMessage;
@@ -28,17 +29,18 @@ class UserController extends BaseController
     public function create(UserRequest $request): JsonResponse
     {
         try {
-            $user = new User();
-            $user->name = $request->input('name');
-            $user->last_name = $request->input('last_name');
-            $user->middle_name = $request->input('middle_name');
-            $user->phone = $request->input('phone');
-            $user->position = $request->input('position');
-            $user->pinfl = $request->input('pinfl');
-            $user->role_id = $request->input('role_id');
-            $user->region_id = $request->input('region_id');
-            $user->password = Hash::make($request->input('phone'));
-            $user->save();
+            $user = User::create([
+                'name' => $request->input('name'),
+                'last_name' => $request->input('last_name'),
+                'middle_name' => $request->input('middle_name'),
+                'phone' => $request->input('phone'),
+                'position' => $request->input('position'),
+                'pinfl' => $request->input('pinfl'),
+                'role_id' => $request->input('role_id'),
+                'region_id' => $request->input('region_id'),
+                'password' => Hash::make($request->input('phone')),
+            ]);
+
             return $this->sendSuccess(new UserResource($user), 'User created successfully.');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());
@@ -50,11 +52,14 @@ class UserController extends BaseController
         try {
             $rand = rand(100000, 999999);
             $message = "Kirish kodi: " . $rand;
-            $sendMessage = new SendMessage($request->phone, $message);
 
+            $sendMessage = new SendMessage($request->phone, $message);
             $response = $sendMessage->sendSms();
+
             if ($response) {
-                SmsMessage::query()->wherePhone($request->phone)->update(['status' => false]);
+                SmsMessage::query()
+                    ->wherePhone($request->phone)
+                    ->update(['status' => false]);
 
                 SmsMessage::query()->create([
                     'phone' => $request->phone,
@@ -64,6 +69,31 @@ class UserController extends BaseController
                 ]);
             }
             return $this->sendSuccess([], 'Successfully send sms.');
+
+        } catch (\Exception $exception) {
+            return $this->sendError($exception->getMessage());
+        }
+    }
+
+    public function regionUsers(): JsonResponse
+    {
+        try {
+            $region = Region::query()->findOrFail(request('region_id'));
+
+            if (!$region) throw new \Exception('Region not found');
+
+            $users = User::query()->where('region_id', $region->id)->get();
+
+            return $this->sendSuccess(UserResource::collection($users), 'Users retrieved successfully.');
+        } catch (\Exception $exception) {
+            return $this->sendError($exception->getMessage());
+        }
+    }
+
+    public function operators()
+    {
+        try {
+            $users = User::query()->where('role_id', 2)->get();
 
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());

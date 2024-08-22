@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,6 +47,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'password' => 'hashed',
+        'role_id' => RoleEnum::class
     ];
 
     public function region(): BelongsTo

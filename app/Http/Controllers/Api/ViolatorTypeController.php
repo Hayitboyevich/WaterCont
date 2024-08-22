@@ -13,9 +13,9 @@ class ViolatorTypeController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            if (\request('id'))
-            {
-                $type = ViolatorType::query()->findOrFail(\request('id'));
+            $id = request('id');
+            if ($id) {
+                $type = ViolatorType::query()->findOrFail($id);
                 return $this->sendSuccess(ViolatorTypeResource::make($type), 'Violator type retrieved successfully.');
             }
             $types = ViolatorType::all();
