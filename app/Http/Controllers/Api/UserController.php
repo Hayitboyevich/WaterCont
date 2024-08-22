@@ -28,6 +28,11 @@ class UserController extends BaseController
                     ->get();
                 return $this->sendSuccess(UserResource::collection($users), 'Users retrieved successfully.');
             }
+            if (\request('operator')->boolean(true))
+            {
+                $users = User::query()->where('role_id', RoleEnum::OPERATOR)->get();
+                return $this->sendSuccess(UserResource::collection($users), 'Users retrieved successfully.');
+            }
             return $this->sendSuccess([], 'Users retrieved successfully.');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());

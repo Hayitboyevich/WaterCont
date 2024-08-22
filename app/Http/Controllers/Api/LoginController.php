@@ -7,6 +7,7 @@ use App\Models\SmsMessage;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -64,5 +65,12 @@ class LoginController extends BaseController
         }
 
         $smsCode->update(['status' => false]);
+    }
+
+    public function logout()
+    {
+        $user = Auth::guard('api')->user();
+        $user->token()->revoke();
+        return $this->sendSuccess(null,'Logged out successfully.');
     }
 }

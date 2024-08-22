@@ -19,5 +19,6 @@ class VerifyCsrfToken extends Middleware
         'api/protocols/edit',
         'api/protocols/reject',
         'api/protocols/confirm',
+        'api/logout',
     ];
 }

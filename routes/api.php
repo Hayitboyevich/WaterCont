@@ -32,6 +32,8 @@ Route::post('send-sms', [UserController::class, 'sendSms']);
 
 
 Route::group(['middleware' => ['auth:api']], function() {
+
+    Route::post('logout', [LoginController::class, 'logout']);
     Route::get('regions', [RegionController::class, 'getRegions']);
     Route::get('districts', [RegionController::class, 'getDistricts']);
 
