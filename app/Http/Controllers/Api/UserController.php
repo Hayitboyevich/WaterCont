@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SmsRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Enums\RoleEnum;
 use App\Models\Region;
 use App\Models\SmsMessage;
 use App\Models\User;
@@ -19,8 +20,15 @@ class UserController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            $users = User::all();
-            return $this->sendSuccess(UserResource::collection($users), 'Users retrieved successfully.');
+            if (\request('region_id'))
+            {
+                $users = User::query()
+                    ->where('region_id', \request('region_id'))
+                    ->whereIn('role_id', [RoleEnum::REGIONAL_INSPECTION, RoleEnum::INSPECTOR])
+                    ->get();
+                return $this->sendSuccess(UserResource::collection($users), 'Users retrieved successfully.');
+            }
+            return $this->sendSuccess([], 'Users retrieved successfully.');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());
         }
