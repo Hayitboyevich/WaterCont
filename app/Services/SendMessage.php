@@ -11,7 +11,6 @@ class SendMessage
     public function __construct( protected ?int $phone , protected string $message){}
     public function sendSms()
     {
-//        dd(config('services.sms_provider.login'), config('services.sms_provider.password'), config('services.sms_provider.nickname'));
         $data = [
             'login' => config('services.sms_provider.login'),
             'password' => config('services.sms_provider.password'),
