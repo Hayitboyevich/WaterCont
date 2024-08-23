@@ -28,8 +28,8 @@ class ProtocolController extends BaseController
                 return $this->sendSuccess(new ProtocolResource($protocol), 'Protocol retrieved successfully.');
             }
 
-            $protocols = ProtocolResource::collection(Protocol::all());
-            return $this->sendSuccess($protocols, 'Protocols retrieved successfully.');
+            $protocols = Protocol::query()->paginate(request('per_page', 10));
+            return $this->sendSuccess(ProtocolResource::collection($protocols), 'Protocols retrieved successfully.', pagination($protocols));
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());
         }
@@ -61,6 +61,13 @@ class ProtocolController extends BaseController
                 'rejected_by',
                 'rejected_comment'
             ]));
+
+            $protocol->log()->create([
+                'user_id' => Auth::id(),
+                'protocol_id' => $protocol->id,
+                'protocol_status_id' => $request->protocol_status_id,
+                'comment' => $request->rejected_comment
+            ]);
             return $this->sendSuccess(ProtocolResource::make($protocol), 'Protocol rejected successfully.');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());
@@ -74,6 +81,12 @@ class ProtocolController extends BaseController
             $protocol->update([
                 'protocol_status_id' => ProtocolStatusEnum::ACCEPTED->value,
                 'accepted_at' => now(),
+            ]);
+
+            $protocol->log()->create([
+                'user_id' => Auth::id(),
+                'protocol_id' => $protocol->id,
+                'protocol_status_id' => ProtocolStatusEnum::ACCEPTED->value,
             ]);
 
             return $this->sendSuccess(ProtocolResource::make($protocol), 'Protocol confirmed successfully.');
