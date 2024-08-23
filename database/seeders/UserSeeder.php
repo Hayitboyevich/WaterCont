@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
         User::query()->create([
             'name' => 'Inspektor',
             'role_id' => 4,
-            'phone' => '998916424258',
+            'phone' => '998917824757',
             'pinfl' => 1234567891234,
             'status' => true,
             'region_id' => 1,

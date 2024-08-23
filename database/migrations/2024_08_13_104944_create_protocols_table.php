@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('protocols', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('protocol_number');
             $table->foreignId('region_id')->constrained();
             $table->foreignId('district_id')->constrained();
             $table->foreignId('protocol_status_id')->constrained();
