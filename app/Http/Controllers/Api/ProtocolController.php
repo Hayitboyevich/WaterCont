@@ -28,6 +28,7 @@ class ProtocolController extends BaseController
                 $protocol = Protocol::query()->findOrFail($protocolId);
                 return $this->sendSuccess(new ProtocolResource($protocol), 'Protocol retrieved successfully.');
             }
+
             $protocols = Protocol::query()
                 ->when($user->isInspector(), function ($query) use ($user) {
                     return $query->where('user_id', $user->id);
