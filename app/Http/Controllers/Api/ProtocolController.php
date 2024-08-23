@@ -59,6 +59,11 @@ class ProtocolController extends BaseController
             if ($request->hasFile('images')) {
                 $this->storeImages($protocol, $request->file('images'));
             }
+            $protocol->logs()->create([
+                'user_id' => Auth::id(),
+                'protocol_id' => $protocol->id,
+                'protocol_status_id' => $request->protocol_status_id,
+            ]);
             DB::commit();
             return $this->sendSuccess(ProtocolResource::make($protocol), 'Protocol created successfully.');
         } catch (\Exception $exception) {
