@@ -26,6 +26,7 @@ class LoginController extends BaseController
 
             $token = $user->createToken('AuthToken')->accessToken;
 
+            $success['id'] = $user->id;
             $success['name'] = $user->name;
             $success['token'] = $token;
             return $this->sendSuccess($success, 'Foydalanuvchi muvaffaqiyatli tizimga kirdi');
