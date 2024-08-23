@@ -43,6 +43,7 @@ class ProtocolResource extends JsonResource
             'rejected_at' => $this->rejected_at,
             'accepted_at' => $this->accepted_at,
             'created_at' => $this->created_at,
+            'images' => ImageResource::collection($this->images),
         ];
     }
 }
