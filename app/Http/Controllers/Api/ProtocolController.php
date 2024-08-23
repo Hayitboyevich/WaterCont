@@ -7,6 +7,7 @@ use App\Http\Requests\ProtocolConfirmRequest;
 use App\Http\Requests\ProtocolEditRequest;
 use App\Http\Requests\ProtocolRejectRequest;
 use App\Http\Requests\ProtocolRequest;
+use App\Http\Resources\ProtocolLogResource;
 use App\Http\Resources\ProtocolResource;
 use App\Models\Enums\ProtocolStatusEnum;
 use App\Models\Protocol;
@@ -76,7 +77,7 @@ class ProtocolController extends BaseController
                 'rejected_comment'
             ]));
 
-            $protocol->log()->create([
+            $protocol->logs()->create([
                 'user_id' => Auth::id(),
                 'protocol_id' => $protocol->id,
                 'protocol_status_id' => $request->protocol_status_id,
@@ -97,7 +98,7 @@ class ProtocolController extends BaseController
                 'accepted_at' => now(),
             ]);
 
-            $protocol->log()->create([
+            $protocol->logs()->create([
                 'user_id' => Auth::id(),
                 'protocol_id' => $protocol->id,
                 'protocol_status_id' => ProtocolStatusEnum::ACCEPTED->value,
@@ -127,7 +128,7 @@ class ProtocolController extends BaseController
                 $this->storeImages($protocol, $request->file('images'));
             }
 
-            $protocol->log()->create([
+            $protocol->logs()->create([
                 'user_id' => Auth::id(),
                 'protocol_id' => $protocol->id,
                 'protocol_status_id' => $request->protocol_status_id,
@@ -138,6 +139,16 @@ class ProtocolController extends BaseController
 
         } catch (\Exception $exception) {
             DB::rollBack();
+            return $this->sendError($exception->getMessage());
+        }
+    }
+
+    public function logs(): JsonResponse
+    {
+        try {
+            $protocol = Protocol::query()->findOrFail(request('protocol_id'));
+            return $this->sendSuccess(ProtocolLogResource::collection($protocol->logs), 'Protocol logs retrieved successfully.');
+        }catch (\Exception $exception){
             return $this->sendError($exception->getMessage());
         }
     }

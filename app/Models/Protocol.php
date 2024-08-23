@@ -21,7 +21,7 @@ class Protocol extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
-    public function log(): HasMany
+    public function logs(): HasMany
     {
         return $this->hasMany(ProtocolLog::class);
     }

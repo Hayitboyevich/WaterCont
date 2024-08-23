@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class ProtocolLog extends Model
@@ -14,8 +15,13 @@ class ProtocolLog extends Model
 
     public $timestamps = false;
 
-    public function images(): MorphMany
+//    public function images(): MorphMany
+//    {
+//        return $this->morphMany(Image::class, 'imageable');
+//    }
+
+    public function user(): BelongsTo
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

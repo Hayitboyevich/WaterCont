@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('repressions', [RepressionController::class, 'index']);
 
     Route::get('protocols', [ProtocolController::class, 'index']);
+    Route::get('protocol/logs', [ProtocolController::class, 'logs']);
 
     Route::post('protocols/create', [ProtocolController::class, 'create']);
 
