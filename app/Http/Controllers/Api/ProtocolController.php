@@ -22,14 +22,28 @@ class ProtocolController extends BaseController
     {
         try {
             $protocolId = request('id');
-
+            $user = Auth::user();
             if ($protocolId) {
                 $protocol = Protocol::query()->findOrFail($protocolId);
                 return $this->sendSuccess(new ProtocolResource($protocol), 'Protocol retrieved successfully.');
             }
+            $protocols = Protocol::query()
+                ->when($user->isInspector(), function ($query) use ($user) {
+                    return $query->where('user_id', $user->id);
+                })
+                ->when($user->isRegionalInspection(), function ($query) use ($user) {
+                    return $query->where('region_id', $user->region_id);
+                });
 
-            $protocols = Protocol::query()->paginate(request('per_page', 10));
-            return $this->sendSuccess(ProtocolResource::collection($protocols), 'Protocols retrieved successfully.', pagination($protocols));
+            $data = $protocols->paginate(request('per_page', 10));
+
+            if ($data->isEmpty()) {
+                return $this->sendError("Protocols not found.");
+            }
+
+            return $this->sendSuccess(ProtocolResource::collection($data), 'Protocols retrieved successfully.', pagination($data));
+
+
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());
         }
