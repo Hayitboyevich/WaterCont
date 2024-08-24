@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::post('users/create', [UserController::class, 'create']);
     Route::post('users/delete', [UserController::class, 'delete']);
     Route::get('profile', [UserController::class, 'profile']);
-    Route::get('pinfl', [UserController::class, 'getUserData']);
+    Route::post('pinfl', [UserController::class, 'getUserData']);
 
 
     Route::get('roles', [RoleController::class, 'index']);
