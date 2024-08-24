@@ -17,4 +17,19 @@ trait ProtocolTrait
             $protocol->protocol_number = $lastNumber + 1;
         });
     }
+
+    public function scopeSearchByNumber($query, $searchTerm)
+    {
+        return $query->where('protocol_number', 'like', '%' . $searchTerm . '%');
+    }
+    public function scopeSearchByPinfl($query, $searchTerm)
+    {
+        return $query->where('violator_pinfl', 'like', '%' . $searchTerm . '%');
+    }
+
+    public function scopeSearchByStatus($query, $searchTerm)
+    {
+        return $query->where('protocol_status_id', $searchTerm);
+    }
+
 }

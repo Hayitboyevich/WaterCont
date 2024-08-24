@@ -35,11 +35,20 @@ class ProtocolController extends BaseController
                 })
                 ->when($user->isRegionalInspection(), function ($query) use ($user) {
                     return $query->where('region_id', $user->region_id);
-                });
+                })
+            ->when(request('status'), function ($query)  {
+                return $query->where('protocol_status_id', request('status'));
+            })
+            ->when(request('search_protocol_number'), function ($query)  {
+                $query->searchByNumber(request('search_protocol_number'));
+            })
+            ->when(request('search_violator_pinfl'), function ($query)  {
+                $query->searchByPinfl(request('search_violator_pinfl'));
+            })
+            ->when(request('search_status'), function ($query)  {
+                $query->searchByStatus(request('search_status'));
+            });
 
-            if (request('status')) {
-                $protocols = $protocols->where('protocol_status_id', request('status'));
-            }
 
             $data = $protocols->paginate(request('per_page', 10));
 
@@ -48,7 +57,6 @@ class ProtocolController extends BaseController
             }
 
             return $this->sendSuccess(ProtocolResource::collection($data), 'Protocols retrieved successfully.', pagination($data));
-
 
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());
