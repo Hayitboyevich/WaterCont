@@ -9,7 +9,7 @@ class UserService
     public function getToken()
     {
         $result = Http::withHeaders([
-            'Authorization' => config('app.egov_token')
+            'Authorization' => config('app.egov.token')
         ])
             ->timeout(15)
             ->post("https://apimgw.egov.uz:9444/oauth2/token?grant_type=password&username=" . config('app.egov.username') . "&password=" . config('app.egov.password'))

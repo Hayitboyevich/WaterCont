@@ -149,6 +149,7 @@ return [
     'egov' => [
       'username' =>  'qv-user',
         'password' =>  '8F5zl2w68GU1itlyGF0w',
+        'token' => 'Basic SXVnQ2h4XzFabkxsQWhkMEp4OWVtTjZqV3AwYToxUzlrWGxLQzBhWnd3bHNzb28xSzJmM1NRN3dh'
     ],
 
     /*
