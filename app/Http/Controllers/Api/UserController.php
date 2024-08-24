@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Services\SendMessage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends BaseController
@@ -113,6 +114,16 @@ class UserController extends BaseController
 
             return $this->sendSuccess([], 'User deleted successfully.');
         }catch (\Exception $exception){
+            return $this->sendError($exception->getMessage());
+        }
+    }
+
+    public function profile(): JsonResponse
+    {
+        try {
+            $user = Auth::user();
+            return $this->sendSuccess(new UserResource($user), 'User retrieved successfully.');
+        }catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());
         }
     }

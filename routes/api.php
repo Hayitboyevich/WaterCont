@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('users', [UserController::class, 'index']);
     Route::post('users/create', [UserController::class, 'create']);
     Route::post('users/delete', [UserController::class, 'delete']);
+    Route::get('profile', [UserController::class, 'profile']);
 
 
     Route::get('roles', [RoleController::class, 'index']);
@@ -61,6 +62,8 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::post('protocols/reject', [ProtocolController::class, 'reject']);
 
     Route::post('protocols/confirm', [ProtocolController::class, 'confirm']);
+
+
 
 });
 
