@@ -20,21 +20,21 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends BaseController
 {
 
-    public function __construct(protected UserService $userService){}
+    public function __construct(protected UserService $userService)
+    {
+    }
 
     public function index(): JsonResponse
     {
         try {
-            if (\request('region_id'))
-            {
+            if (\request('region_id')) {
                 $users = User::query()
                     ->where('region_id', \request('region_id'))
                     ->whereIn('role_id', [RoleEnum::REGIONAL_INSPECTION, RoleEnum::INSPECTOR])
                     ->get();
                 return $this->sendSuccess(UserResource::collection($users), 'Users retrieved successfully.');
             }
-            if (\request('operator')->boolean(true))
-            {
+            if (\request('operator')->boolean(true)) {
                 $users = User::query()->where('role_id', RoleEnum::OPERATOR)->get();
                 return $this->sendSuccess(UserResource::collection($users), 'Users retrieved successfully.');
             }
@@ -117,7 +117,7 @@ class UserController extends BaseController
             $user->delete();
 
             return $this->sendSuccess([], 'User deleted successfully.');
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());
         }
     }
@@ -127,7 +127,7 @@ class UserController extends BaseController
         try {
             $user = Auth::user();
             return $this->sendSuccess(new UserResource($user), 'User retrieved successfully.');
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());
         }
     }
@@ -135,9 +135,19 @@ class UserController extends BaseController
     public function getUserData(): JsonResponse
     {
         try {
-          $data = $this->userService->getProfile(request('pinfl'));
-          dd($data);
-        }catch (\Exception $exception){
+            $data = [];
+            $meta = $this->userService->getProfile(request('pinfl'));
+            $data = [
+                'name' => $meta['result']['name'],
+                'middle_name' => $meta['result']['partonimic'],
+                'last_name' => $meta['result']['surname'],
+                'pinfl' => $meta['result']['pnfl'],
+                'department_name' => $meta[0]['result']['positions']['dep_name'],
+                'organization_name' => $meta[0]['result']['positions']['org'],
+                'position' => $meta[0]['result']['positions']['position'],
+            ];
+            return $this->sendSuccess($data, 'User data  get successfully.');
+        } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());
         }
     }
