@@ -28,7 +28,7 @@ class UserService
                 ]);
             return $position->json();
         } catch (\Exception $exception) {
-            return null;
+            throw new \Exception('Serviceda Xatolik');
         }
     }
 }

@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'middle_name' => $this->middle_name,
             'last_name' => $this->last_name,
             'phone' => $this->phone,
+            'position' => $this->position,
             "role" => RoleResource::make($this->role),
             "region" => RegionResource::make($this->region)
         ];
