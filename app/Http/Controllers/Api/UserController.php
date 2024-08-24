@@ -137,14 +137,14 @@ class UserController extends BaseController
         try {
             $data = [];
             $meta = $this->userService->getProfile(request('pinfl'));
-            $data = [
+            $data[] = [
                 'name' => $meta['result']['name'],
                 'middle_name' => $meta['result']['partonimic'],
                 'last_name' => $meta['result']['surname'],
                 'pinfl' => $meta['result']['pnfl'],
-                'department_name' => $meta[0]['result']['positions']['dep_name'],
-                'organization_name' => $meta[0]['result']['positions']['org'],
-                'position' => $meta[0]['result']['positions']['position'],
+                'department_name' => $meta['result']['positions'][0]['dep_name'],
+                'organization_name' => $meta['result']['positions'][0]['org'],
+                'position' => $meta['result']['positions'][0]['position'],
             ];
             return $this->sendSuccess($data, 'User data  get successfully.');
         } catch (\Exception $exception) {
