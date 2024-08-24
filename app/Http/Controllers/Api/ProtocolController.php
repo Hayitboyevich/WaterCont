@@ -37,6 +37,10 @@ class ProtocolController extends BaseController
                     return $query->where('region_id', $user->region_id);
                 });
 
+            if (request('status')) {
+                $protocols = $protocols->where('protocol_status_id', request('status'));
+            }
+
             $data = $protocols->paginate(request('per_page', 10));
 
             if ($data->isEmpty()) {
