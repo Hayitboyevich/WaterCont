@@ -27,7 +27,6 @@ return new class extends Migration
             $table->foreignId('district_id')->nullable()->constrained();
             $table->string('password');
             $table->rememberToken();
-            $table->softDeletes();
             $table->timestamps();
         });
     }
