@@ -11,6 +11,7 @@ use App\Models\Region;
 use App\Models\SmsMessage;
 use App\Models\User;
 use App\Services\SendMessage;
+use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends BaseController
 {
+
+    public function __construct(protected UserService $userService){}
+
     public function index(): JsonResponse
     {
         try {
@@ -124,6 +128,16 @@ class UserController extends BaseController
             $user = Auth::user();
             return $this->sendSuccess(new UserResource($user), 'User retrieved successfully.');
         }catch (\Exception $exception) {
+            return $this->sendError($exception->getMessage());
+        }
+    }
+
+    public function getUserData(): JsonResponse
+    {
+        try {
+          $data = $this->userService->getProfile(request('pinfl'));
+          dd($data);
+        }catch (\Exception $exception){
             return $this->sendError($exception->getMessage());
         }
     }

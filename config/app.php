@@ -146,6 +146,11 @@ return [
         // 'store' => 'redis',
     ],
 
+    'egov' => [
+      'username' =>  'qv-user',
+        'password' =>  '8F5zl2w68GU1itlyGF0w',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
