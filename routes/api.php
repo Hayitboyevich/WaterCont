@@ -63,9 +63,6 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::post('protocols/reject', [ProtocolController::class, 'reject']);
 
     Route::post('protocols/confirm', [ProtocolController::class, 'confirm']);
-
-
-
 });
 
 
