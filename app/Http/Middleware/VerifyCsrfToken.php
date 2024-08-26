@@ -20,6 +20,7 @@ class VerifyCsrfToken extends Middleware
         'api/protocols/reject',
         'api/protocols/confirm',
         'api/logout',
-        'api/users/delete'
+        'api/users/delete',
+        'api/pinfl'
     ];
 }
