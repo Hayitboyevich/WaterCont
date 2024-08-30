@@ -27,7 +27,6 @@ class ProtocolRequest extends FormRequest
             'region_id' => 'required|exists:regions,id',
             'district_id' => 'required|exists:districts,id',
             'protocol_status_id' => 'required|exists:protocol_statuses,id',
-            'address' => 'required|string',
             'long' => 'required|numeric',
             'lat' => 'required|numeric',
             'object_name' => 'required|string',
