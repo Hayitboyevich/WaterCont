@@ -31,7 +31,6 @@ class UserRequest extends FormRequest
             "pinfl" => "required|integer|digits:14",
             "role_id" => "required|integer|exists:roles,id",
             "region_id" => "required|integer|exists:regions,id",
-            'address' => 'required|string|max:255',
         ];
     }
 }
