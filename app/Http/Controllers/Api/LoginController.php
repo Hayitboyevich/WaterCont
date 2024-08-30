@@ -68,6 +68,25 @@ class LoginController extends BaseController
         $smsCode->update(['status' => false]);
     }
 
+    public function auth(): JsonResponse
+    {
+        try {
+            if (Auth::attempt(['phone' => request('phone'), 'password' => request('password')])) {
+                $user = Auth::user();
+                $token = $user->createToken('AuthToken')->accessToken;
+                $success['id'] = $user->id;
+                $success['name'] = $user->name;
+                $success['token'] = $token;
+                return $this->sendSuccess($success, 'Foydalanuvchi muvaffaqiyatli tizimga kirdi');
+            }
+            else{
+                return $this->sendError('Unauthorised.', code: 401);
+            }
+        }catch (\Exception $exception){
+            return $this->sendError($exception->getMessage(), code: Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
     public function logout()
     {
         $user = Auth::guard('api')->user();

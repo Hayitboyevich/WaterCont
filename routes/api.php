@@ -28,6 +28,7 @@ use App\Http\Controllers\Api\RepressionController;
 
 
 Route::post('login', [LoginController::class, 'login']);
+Route::post('auth-login', [LoginController::class, 'auth']);
 Route::post('send-sms', [UserController::class, 'sendSms']);
 
 
