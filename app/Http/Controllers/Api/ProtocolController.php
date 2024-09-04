@@ -22,6 +22,7 @@ class ProtocolController extends BaseController
     public function index(): JsonResponse
     {
         try {
+            $data = collect();
             $protocolId = request('id');
             $user = Auth::user();
             if ($protocolId) {
@@ -49,8 +50,17 @@ class ProtocolController extends BaseController
                 $query->searchByStatus(request('search_status'));
             });
 
+            if(request('filter_by') == 10){
+                $data = $protocols->whereIn('status', [ProtocolStatusEnum::NEW, ProtocolStatusEnum::RETURNED])->paginate(request('per_page', 10));
+            }
 
-            $data = $protocols->paginate(request('per_page', 10));
+            if (request('filter_by') == 30) {
+                $data = $protocols->whereIn('status', [ProtocolStatusEnum::REJECTED])->paginate(request('per_page', 10));
+            }
+
+            if (request('filter_by') == 40) {
+                $data = $protocols->whereIn('status', [ProtocolStatusEnum::ACCEPTED])->paginate(request('per_page', 10));
+            }
 
             if ($data->isEmpty()) {
                 return $this->sendSuccess([],"Protocols not found.");

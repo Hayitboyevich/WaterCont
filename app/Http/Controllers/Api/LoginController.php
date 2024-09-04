@@ -73,6 +73,8 @@ class LoginController extends BaseController
         try {
             if (Auth::attempt(['phone' => request('phone'), 'password' => request('password')])) {
                 $user = Auth::user();
+                if (!($user->isOperator() || $user->isAdmin() || $user->isManager())) return $this->sendError('Sizda login va parol bilan kirishga ruxsat yo\'q.', code: 401);
+
                 $token = $user->createToken('AuthToken')->accessToken;
                 $success['id'] = $user->id;
                 $success['name'] = $user->name;
