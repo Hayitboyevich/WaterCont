@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Enums\RoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,15 +23,22 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name' => 'required|string|max:255',
             'middle_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'phone' => 'required|regex:/^998\d{9}$/|unique:users,phone',
             'position' => 'required|string|max:255',
-            "pinfl" => "required|integer|digits:14",
-            "role_id" => "required|integer|exists:roles,id",
-            "region_id" => "required|integer|exists:regions,id",
+            'pinfl' => 'required|integer|digits:14',
+            'role_id' => 'required|integer|exists:roles,id',
+            'region_id' => 'required|integer|exists:regions,id',
         ];
+
+        if ($this->input('role_id') == RoleEnum::OPERATOR) {
+            $rules['region_id'] = 'nullable|integer|exists:regions,id';
+        }
+
+        return $rules;
+
     }
 }
