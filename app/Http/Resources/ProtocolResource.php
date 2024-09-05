@@ -29,7 +29,7 @@ class ProtocolResource extends JsonResource
             'repression' => RepressionResource::make($this->repression),
             'amount' => $this->amount,
             'fixed_date' => $this->fixed_date,
-            'user' => UserResource::make($this->user),
+            'user' => $this->user ?  UserResource::make($this->user) : null,
             'user_position' => $this->user_position,
             'violator_type' => ViolatorTypeResource::make($this->violatorType),
             'violator_pinfl' => $this->violator_pinfl,
