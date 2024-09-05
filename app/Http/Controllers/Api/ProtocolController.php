@@ -59,7 +59,7 @@ class ProtocolController extends BaseController
             } elseif ($filterBy == 30) {
                 $protocols->whereIn('protocol_status_id', [ProtocolStatusEnum::REJECTED]);
             } elseif ($filterBy == 40) {
-                $protocols->whereIn('status', [ProtocolStatusEnum::ACCEPTED]);
+                $protocols->whereIn('protocol_status_id', [ProtocolStatusEnum::ACCEPTED]);
             }else {
                 return $this->sendSuccess([], "Protocols not found.");
             }
