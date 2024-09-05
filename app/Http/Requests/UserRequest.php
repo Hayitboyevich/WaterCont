@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'last_name' => 'required|string|max:255',
             'phone' => 'required|regex:/^998\d{9}$/|unique:users,phone',
             'position' => 'required|string|max:255',
-            'pinfl' => 'required|integer|digits:14',
+            'pinfl' => 'required|integer|digits:14|unique:users,pinfl',
             'role_id' => 'required|integer|exists:roles,id',
             'region_id' => 'required|integer|exists:regions,id',
         ];
