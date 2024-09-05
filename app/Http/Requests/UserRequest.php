@@ -34,7 +34,7 @@ class UserRequest extends FormRequest
             'region_id' => 'required|integer|exists:regions,id',
         ];
 
-        if ($this->input('role_id') == RoleEnum::OPERATOR) {
+        if ($this->input('role_id') == RoleEnum::OPERATOR->value) {
             $rules['region_id'] = 'nullable|integer|exists:regions,id';
         }
 
