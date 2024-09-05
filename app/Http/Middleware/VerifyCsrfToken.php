@@ -14,6 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'api/send-sms',
         'api/login',
+        'api/auth-login',
         'api/users/create',
         'api/protocols/create',
         'api/protocols/edit',
