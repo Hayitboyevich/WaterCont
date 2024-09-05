@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignId('repression_id')->comment('Jazo')->constrained();
             $table->float('amount')->comment('zarar summasi');
             $table->date('fixed_date');
-            $table->foreignId('user_id')->comment('Inspector')->constrained();
+            $table->foreignId('user_id')->comment('Inspector')->constrained()->onDelete('set null');
             $table->string('user_position')->comment('Inspector Lavozimi');
             $table->foreignId('violator_type_id')->constrained();
             $table->bigInteger('violator_pinfl');
