@@ -12,6 +12,7 @@ use App\Http\Resources\ProtocolResource;
 use App\Models\Enums\ProtocolStatusEnum;
 use App\Models\Protocol;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,54 +23,57 @@ class ProtocolController extends BaseController
     public function index(): JsonResponse
     {
         try {
-            $data = collect();
             $protocolId = request('id');
             $user = Auth::user();
+
+            // ID orqali yagona protokolni topish
             if ($protocolId) {
                 $protocol = Protocol::query()->findOrFail($protocolId);
                 return $this->sendSuccess(new ProtocolResource($protocol), 'Protocol retrieved successfully.');
             }
 
+            // Protokol so'rovlarini yaratish
             $protocols = Protocol::query()
                 ->when($user->isInspector(), function ($query) use ($user) {
-                    return $query->where('user_id', $user->id);
+                    $query->where('user_id', $user->id);
                 })
                 ->when($user->isRegionalInspection(), function ($query) use ($user) {
-                    return $query->where('region_id', $user->region_id);
+                    $query->where('region_id', $user->region_id);
                 })
-            ->when(request('status'), function ($query)  {
-                return $query->where('protocol_status_id', request('status'));
-            })
-            ->when(request('search_protocol_number'), function ($query)  {
-                $query->searchByNumber(request('search_protocol_number'));
-            })
-            ->when(request('search_violator_pinfl'), function ($query)  {
-                $query->searchByPinfl(request('search_violator_pinfl'));
-            })
-            ->when(request('search_status'), function ($query)  {
-                $query->searchByStatus(request('search_status'));
-            });
+                ->when(request('status'), function ($query) {
+                    $query->where('protocol_status_id', request('status'));
+                })
+                ->when(request('search_protocol_number'), function ($query) {
+                    $query->searchByNumber(request('search_protocol_number'));
+                })
+                ->when(request('search_violator_pinfl'), function ($query) {
+                    $query->searchByPinfl(request('search_violator_pinfl'));
+                })
+                ->when(request('search_status'), function ($query) {
+                    $query->searchByStatus(request('search_status'));
+                });
 
-            if(request('filter_by') == 10){
-                $data = $protocols->whereIn('protocol_status_id', [ProtocolStatusEnum::NEW, ProtocolStatusEnum::RETURNED])->paginate(request('per_page', 10));
+            $filterBy = request('filter_by');
+            if ($filterBy == 10) {
+                $protocols->whereIn('protocol_status_id', [ProtocolStatusEnum::NEW, ProtocolStatusEnum::RETURNED]);
+            } elseif ($filterBy == 30) {
+                $protocols->whereIn('protocol_status_id', [ProtocolStatusEnum::REJECTED]);
+            } elseif ($filterBy == 40) {
+                $protocols->whereIn('status', [ProtocolStatusEnum::ACCEPTED]);
             }
 
-            if (request('filter_by') == 30) {
-                $data = $protocols->whereIn('protocol_status_id', [ProtocolStatusEnum::REJECTED])->paginate(request('per_page', 10));
-            }
-
-            if (request('filter_by') == 40) {
-                $data = $protocols->whereIn('status', [ProtocolStatusEnum::ACCEPTED])->paginate(request('per_page', 10));
-            }
+            $data = $protocols->paginate(request('per_page', 10));
 
             if ($data->isEmpty()) {
-                return $this->sendSuccess([],"Protocols not found.");
+                return $this->sendSuccess([], "Protocols not found.");
             }
 
             return $this->sendSuccess(ProtocolResource::collection($data), 'Protocols retrieved successfully.', pagination($data));
 
-        } catch (\Exception $exception) {
-            return $this->sendError($exception->getMessage());
+        } catch (ModelNotFoundException $e) {
+            return $this->sendError('Protocol not found.', 404);
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 500);
         }
     }
 
