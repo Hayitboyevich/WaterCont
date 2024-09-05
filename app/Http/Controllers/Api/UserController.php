@@ -34,7 +34,7 @@ class UserController extends BaseController
                     ->get();
                 return $this->sendSuccess(UserResource::collection($users), 'Users retrieved successfully.');
             }
-            if (\request('operator')->boolean(true)) {
+            if (\request('operator')) {
                 $users = User::query()->where('role_id', RoleEnum::OPERATOR)->get();
                 return $this->sendSuccess(UserResource::collection($users), 'Users retrieved successfully.');
             }
