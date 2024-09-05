@@ -71,7 +71,7 @@ class LoginController extends BaseController
     public function auth(): JsonResponse
     {
         try {
-            if (Auth::attempt(['phone' => request('phone'), 'password' => request('password')])) {
+            if (Auth::attempt(['login' => request('login'), 'password' => request('password')])) {
                 $user = Auth::user();
                 if (!($user->isOperator() || $user->isAdmin() || $user->isManager())) return $this->sendError('Sizda login va parol bilan kirishga ruxsat yo\'q.', code: 401);
 
