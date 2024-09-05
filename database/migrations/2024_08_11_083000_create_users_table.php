@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone')->unique();
+            $table->string('login')->nullable();
             $table->bigInteger('pinfl')->unique();
             $table->string('address')->nullable();
             $table->timestamp('last_login_at')->nullable();

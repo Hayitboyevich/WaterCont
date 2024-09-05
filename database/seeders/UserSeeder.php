@@ -16,44 +16,24 @@ class UserSeeder extends Seeder
     {
         User::query()->truncate();
         User::query()->create([
-           'name' => 'Super Admin',
+            'name' => 'Super Admin',
             'role_id' => 1,
+            'login' => 'super-admin',
             'phone' => '998911234561',
             'pinfl' => 12345678912341,
             'status' => true,
-            'password' => Hash::make(998911234561)
+            'password' => Hash::make('super-admin')
         ]);
 
         User::query()->create([
             'name' => 'Kadr',
             'role_id' => 2,
+            'login' => 'kadr',
             'phone' => '998916424257',
             'pinfl' => 1234567891232,
             'status' => true,
             'region_id' => 1,
-            'password' => Hash::make(998911234562)
+            'password' => Hash::make('reskadr123')
         ]);
-
-
-        User::query()->create([
-            'name' => 'Hududiy Inspektor',
-            'role_id' => 3,
-            'phone' => '998945320044',
-            'pinfl' => 1234567891233,
-            'status' => true,
-            'region_id' => 1,
-            'password' => Hash::make(998911234563)
-        ]);
-
-        User::query()->create([
-            'name' => 'Inspektor',
-            'role_id' => 4,
-            'phone' => '998917824757',
-            'pinfl' => 1234567891234,
-            'status' => true,
-            'region_id' => 1,
-            'password' => Hash::make(998911234564)
-        ]);
-
     }
 }
