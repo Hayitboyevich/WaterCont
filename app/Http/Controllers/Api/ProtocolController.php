@@ -51,11 +51,11 @@ class ProtocolController extends BaseController
             });
 
             if(request('filter_by') == 10){
-                $data = $protocols->whereIn('status', [ProtocolStatusEnum::NEW, ProtocolStatusEnum::RETURNED])->paginate(request('per_page', 10));
+                $data = $protocols->whereIn('protocol_status_id', [ProtocolStatusEnum::NEW, ProtocolStatusEnum::RETURNED])->paginate(request('per_page', 10));
             }
 
             if (request('filter_by') == 30) {
-                $data = $protocols->whereIn('status', [ProtocolStatusEnum::REJECTED])->paginate(request('per_page', 10));
+                $data = $protocols->whereIn('protocol_status_id', [ProtocolStatusEnum::REJECTED])->paginate(request('per_page', 10));
             }
 
             if (request('filter_by') == 40) {

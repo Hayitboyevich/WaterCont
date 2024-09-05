@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'name' => 'Kadr',
             'role_id' => 2,
             'login' => 'kadr',
-            'phone' => '998916424257',
+            'phone' => '998916424258',
             'pinfl' => 1234567891232,
             'status' => true,
             'region_id' => 1,
