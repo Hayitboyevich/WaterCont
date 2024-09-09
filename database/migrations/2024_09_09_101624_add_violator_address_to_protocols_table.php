@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('protocols', function (Blueprint $table) {
-            $table->text('address')->nullable()->change();
+            $table->text('violator_address')->after('violator_phone')->nullable();
         });
     }
 

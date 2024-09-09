@@ -35,6 +35,7 @@ class ProtocolResource extends JsonResource
             'violator_pinfl' => $this->violator_pinfl,
             'violator_name' => $this->violator_name,
             'violator_phone' => $this->violator_phone,
+            'violator_address' => $this->violator_address,
             'assignee_name' => $this->assignee_name,
             'inspector_name' => $this->inspector_name,
             'comment' => $this->comment,

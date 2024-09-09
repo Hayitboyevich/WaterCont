@@ -24,4 +24,9 @@ class ProtocolLog extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(ProtocolStatus::class, 'protocol_status_id');
+    }
 }

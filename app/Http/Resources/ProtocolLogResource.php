@@ -18,6 +18,7 @@ class ProtocolLogResource extends JsonResource
             'id' => $this->id,
             'user' => UserResource::make($this->user),
             'protocol_id' => $this->protocol_id,
+            'status' => ProtocolStatusResource::make($this->status),
             'comment' => $this->comment,
             'changed_at' => $this->changed_at
 
