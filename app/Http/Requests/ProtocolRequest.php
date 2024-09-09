@@ -38,7 +38,7 @@ class ProtocolRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
             'user_position' => 'required|string',
             'violator_type_id' => 'required|exists:violator_types,id',
-            'violator_pinfl' => 'required|integer|regex:/^\d{9}$|^\d{14}$/',
+            'violator_pinfl' => 'required|integer|regex:/^\d{9}$|^\d{14}$',
             'violator_name' => 'required|string',
             'violator_phone' => 'required|regex:/^998\d{9}$/',
             'violator_address' => 'required|string',

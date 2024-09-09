@@ -43,7 +43,7 @@ class ProtocolResource extends JsonResource
             'rejected_by' => $this->rejected_by,
             'rejected_at' => $this->rejected_at,
             'accepted_at' => $this->accepted_at,
-            'created_at' => $this->created_at,
+            'created_at' =>  $this->created_at->timezone('Asia/Tashkent')->toDateTimeString(),
             'images' => ImageResource::collection($this->images),
         ];
     }
