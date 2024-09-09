@@ -16,6 +16,8 @@ class Protocol extends Model
 
     protected $guarded = [];
 
+    public $timestamps = true;
+
     public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
