@@ -38,7 +38,16 @@ class ProtocolRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
             'user_position' => 'required|string',
             'violator_type_id' => 'required|exists:violator_types,id',
-            'violator_pinfl' => 'required|integer|regex:/^\d{9}$|^\d{14}$',
+            'violator_pinfl' => [
+                'sometimes',
+                'integer',
+                function ($attribute, $value, $fail) {
+                    $length = strlen($value);
+                    if (!in_array($length, [9, 14])) {
+                        $fail("The $attribute must be 9 or 14 digits.");
+                    }
+                },
+            ],
             'violator_name' => 'required|string',
             'violator_phone' => 'required|regex:/^998\d{9}$/',
             'violator_address' => 'required|string',
