@@ -61,7 +61,7 @@ class ProtocolController extends BaseController
                 return $this->sendSuccess([], "Protocols not found.");
             }
 
-            $data = $protocols->paginate(request('per_page', 10));
+            $data = $protocols->orderBy('protocol_number', 'desc')->paginate(request('per_page', 10));
 
             if ($data->isEmpty()) {
                 return $this->sendSuccess([], "Protocols not found.");
