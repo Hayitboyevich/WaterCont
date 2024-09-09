@@ -39,7 +39,7 @@ class ProtocolEditRequest extends FormRequest
             'user_id' => 'sometimes|exists:users,id',
             'user_position' => 'sometimes|string',
             'violator_type_id' => 'sometimes|exists:violator_types,id',
-            'violator_pinfl' => 'sometimes|integer|regex:^\d{9}$|^\d{14}$',
+            'violator_pinfl' => 'sometimes|integer|regex:/^\d{9}$|^\d{14}$/',
             'violator_name' => 'sometimes|string',
             'violator_phone' => 'sometimes|regex:/^998\d{9}$/',
             'violator_address' => 'sometimes|string',
