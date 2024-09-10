@@ -51,8 +51,8 @@ class ProtocolRequest extends FormRequest
             'violator_name' => 'required|string',
             'violator_phone' => 'required|regex:/^998\d{9}$/',
             'violator_address' => 'required|string',
-            'assignee_name' => 'string',
-            'inspector_name' => 'string',
+            'assignee_name' => 'sometimes|string',
+            'inspector_name' => 'sometimes|string',
             'comment' => 'nullable|string',
             'images.*' => 'required|image|mimes:jpg,jpeg,png',
         ];
