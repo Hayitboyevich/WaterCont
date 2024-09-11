@@ -113,8 +113,11 @@ class UserController extends BaseController
     {
         try {
             $user = User::query()->findOrFail(request('id'));
-            $user->delete();
+            $user->phone = null;
+            $user->pinfl = null;
+            $user->save();
 
+            $user->delete();
             return $this->sendSuccess([], 'User deleted successfully.');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage());
