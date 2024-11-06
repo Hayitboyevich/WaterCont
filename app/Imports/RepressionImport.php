@@ -23,6 +23,7 @@ class RepressionImport implements ToCollection, WithHeadingRow
             Repression::query()->create([
                'name' => $row['name'],
                'description' => $row['description'],
+                'protocol_type_id' => 1
             ]);
         }
     }

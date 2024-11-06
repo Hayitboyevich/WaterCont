@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\ViolatorTypeController;
 use App\Http\Controllers\Api\ViolationController;
 use App\Http\Controllers\Api\RepressionController;
+use App\Http\Controllers\Api\InformationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,12 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::post('users/delete', [UserController::class, 'delete']);
     Route::get('profile', [UserController::class, 'profile']);
     Route::post('pinfl', [UserController::class, 'getUserData']);
+
+    Route::get('well-status', [InformationController::class, 'getWellStatus']);
+    Route::get('counter-info', [InformationController::class, 'getCounterInfo']);
+    Route::get('protocol-type', [InformationController::class, 'getProtocolType']);
+    Route::get('smz', [InformationController::class, 'getSMZ']);
+    Route::get('debit', [InformationController::class, 'getDebit']);
 
 
     Route::get('roles', [RoleController::class, 'index']);

@@ -61,4 +61,14 @@ class Protocol extends Model
     {
         return $this->belongsTo(ViolatorType::class);
     }
+
+    public function protocolType():BelongsTo
+    {
+        return $this->belongsTo(ProtocolType::class);
+    }
+
+    public function wells(): HasMany
+    {
+        return $this->hasMany(Well::class);
+    }
 }

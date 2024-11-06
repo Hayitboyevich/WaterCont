@@ -9,6 +9,7 @@ use App\Http\Resources\ProtocolLogResource;
 use App\Http\Resources\ProtocolResource;
 use App\Models\Enums\ProtocolStatusEnum;
 use App\Models\Protocol;
+use App\Services\ProtocolService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,6 +18,9 @@ use Illuminate\Support\Facades\DB;
 
 class ProtocolController extends BaseController
 {
+
+    public function __construct(public ProtocolService $service){}
+
     public function index(): JsonResponse
     {
         try {
@@ -78,12 +82,10 @@ class ProtocolController extends BaseController
 
     public function create(ProtocolRequest $request): JsonResponse
     {
+
         DB::beginTransaction();
         try {
-            $protocol = Protocol::query()->create($request->except('images'));
-            if ($request->hasFile('images')) {
-                $this->storeImages($protocol, $request->file('images'));
-            }
+            $protocol = $this->service->saveProtocol($request);
             $protocol->logs()->create([
                 'user_id' => Auth::id(),
                 'protocol_id' => $protocol->id,
@@ -184,11 +186,5 @@ class ProtocolController extends BaseController
         }
     }
 
-    private function storeImages(Protocol $protocol, $images)
-    {
-        foreach ($images as $image) {
-            $imagePath = $image->store('protocols', 'public');
-            $protocol->images()->create(['url' => $imagePath]);
-        }
-    }
+
 }

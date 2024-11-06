@@ -19,7 +19,10 @@ class RepressionController extends BaseController
                 $type = Repression::query()->findOrFail(\request('id'));
                 return $this->sendSuccess(RepressionResource::make($type), 'Repression  retrieved successfully.');
             }
-            $types = Repression::all();
+            $types = Repression::query()
+                ->when(request('type'), function ($query) {
+                $query->where('protocol_type_id', request('type'));
+            })->get();
             return $this->sendSuccess(RepressionResource::collection($types), 'Repressions  retrieved successfully.');
         }catch (\Exception $exception){
             return $this->sendError($exception->getMessage());

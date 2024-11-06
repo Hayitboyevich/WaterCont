@@ -12,8 +12,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         $this->call([
+            CounterInfoSeeder::class,
+            WellStatusSeeder::class,
+            SMZSeeder::class,
+            DebitSeeder::class,
             RepressionSeeder::class,
             ViolationSeeder::class,
             ViolatorTypeSeeder::class,
@@ -21,6 +24,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ProtocolStatusSeeder::class,
+            ProtocolTypeSeeder::class
         ]);
     }
 }

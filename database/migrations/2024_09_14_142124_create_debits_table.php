@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('repressions', function (Blueprint $table) {
+        Schema::create('debits', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->boolean('status')->default(false);
-            $table->integer('protocol_type_id')->index();
-            $table->softDeletes();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('repressions');
+        Schema::dropIfExists('debits');
     }
 };
