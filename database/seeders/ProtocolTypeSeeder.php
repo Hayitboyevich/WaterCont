@@ -14,15 +14,27 @@ class ProtocolTypeSeeder extends Seeder
     public function run(): void
     {
         ProtocolType::query()->create([
-           'name' => 'Oddiy',
+           'name' => 'Аniqlangan noqonuniy ulanmalar',
         ]);
 
         ProtocolType::query()->create([
-            'name' => 'Quduq',
+            'name' => 'Davlat dasturlari doirasida burgʼulangan quduqlar',
         ]);
 
         ProtocolType::query()->create([
-            'name' => 'Avariya',
+            'name' => 'Аniqlangan avariya holatlari',
+        ]);
+
+        ProtocolType::query()->create([
+            'name' => 'Ichimlik suv sifati tahlillari',
+        ]);
+
+        ProtocolType::query()->create([
+            'name' => 'Shartnomaviy munosabatlarga oid axborotlar',
+        ]);
+
+        ProtocolType::query()->create([
+            'name' => 'Texnik shartlar to\'g\'risidagi ma\'lumotlar',
         ]);
     }
 }
