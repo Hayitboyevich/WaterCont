@@ -19,15 +19,19 @@ return new class extends Migration
             $table->boolean('technical_passport')->default(false);
             $table->boolean('license')->default(false);
             $table->integer('counter_info_id')->index();
-            $table->string('chlorination_device')->nullable();
-            $table->string('bactericidal_device')->nullable();
-            $table->string('other_device')->nullable();
+            $table->string('chlorination_device_effective')->nullable();
+            $table->string('chlorination_device_defective')->nullable();
+            $table->string('bactericidal_device_effective')->nullable();
+            $table->string('bactericidal_device_defective')->nullable();
+            $table->string('other_device_effective')->nullable();
+            $table->string('other_device_defective')->nullable();
             $table->boolean('not_device')->default(false);
             $table->integer('smz_id')->index();
             $table->integer('debit_id')->index();
             $table->foreignId('repression_id')->comment('Jazo')->constrained()->onDelete('set null');
             $table->float('amount')->comment('zarar summasi');
             $table->date('fixed_date');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }
