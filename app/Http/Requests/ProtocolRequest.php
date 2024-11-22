@@ -62,6 +62,19 @@ class ProtocolRequest extends FormRequest
             'crash_technic_count' => 'sometimes|nullable|string',
             'images.*' => 'sometimes|array',
             'wells' => 'sometimes|array',
+            'consumer_id' => 'sometimes|nullable|exists:consumers,id',
+            'building_type_id' => 'sometimes|nullable|exists:building_types,id',
+            'organization_id' => 'sometimes|nullable|exists:organizations,id',
+            'measure_id' => 'sometimes|nullable|exists:measure_types,id',
+            'standart_norm_id' => 'sometimes|nullable|exists:standart_norms,id',
+            'laboratory_report_indicator' => 'sometimes|nullable|string',
+            'laboratory_report' => 'sometimes|nullable|boolean',
+            'technical_specifications' => 'sometimes|nullable|boolean',
+            'billing' => 'sometimes|nullable|boolean',
+            'contract_information' => 'sometimes|nullable|boolean',
+            'contract_requirements' => 'sometimes|nullable|boolean',
+            'billing_subscriber' => 'sometimes|nullable|boolean',
+            'technical_requirements' => 'sometimes|nullable|boolean',
         ];
     }
 

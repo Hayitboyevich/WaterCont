@@ -18,6 +18,16 @@ class ProtocolService
         if ($data->protocol_type_id == 3) {
             return $this->saveCrash($data);
         }
+        if ($data->protocol_type_id == 4) {
+            return $this->saveWater($data);
+        }
+        if ($data->protocol_type_id == 5) {
+            return $this->saveContract($data);
+        }
+
+        if ($data->protocol_type_id == 6) {
+            return $this->saveTechnic($data);
+        }
     }
 
     private function saveSimple($data)
@@ -74,6 +84,36 @@ class ProtocolService
         if ($data->hasFile('images')) {
             $this->storeImages($protocol, $data->file('images'));
         }
+        return $protocol;
+    }
+
+    private function saveWater($data)
+    {
+        $protocol = Protocol::query()->create($data->except(['images', 'wells']));
+        if ($data->hasFile('images')) {
+            $this->storeImages($protocol, $data->file('images'));
+        }
+
+        return $protocol;
+    }
+
+    private function saveContract($data)
+    {
+        $protocol = Protocol::query()->create($data->except(['images', 'wells']));
+        if ($data->hasFile('images')) {
+            $this->storeImages($protocol, $data->file('images'));
+        }
+
+        return $protocol;
+    }
+
+    private function saveTechnic($data)
+    {
+        $protocol = Protocol::query()->create($data->except(['images', 'wells']));
+        if ($data->hasFile('images')) {
+            $this->storeImages($protocol, $data->file('images'));
+        }
+
         return $protocol;
     }
 
