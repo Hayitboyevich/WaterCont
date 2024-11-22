@@ -24,6 +24,11 @@ class LoginController extends BaseController
                 return $this->sendError('Foydalanuvchi topilmadi.', code: Response::HTTP_UNAUTHORIZED);
             }
 
+            if (!$user->status)
+            {
+                return $this->sendError('Foydalanuvchi faol emas', code: Response::HTTP_FORBIDDEN);
+            }
+
             $token = $user->createToken('AuthToken')->accessToken;
 
             $success['id'] = $user->id;

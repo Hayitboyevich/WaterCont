@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('phone')->nullable()->unique();
+            $table->string('phone')->nullable();
+            $table->string('pinfl')->nullable();
             $table->string('login')->nullable();
-            $table->bigInteger('pinfl')->nullable()->unique();
             $table->string('address')->nullable();
             $table->timestamp('last_login_at')->nullable();
             $table->string('position')->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(true);
             $table->foreignId('role_id')->constrained()->onDelete('set null');
             $table->foreignId('region_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('district_id')->nullable()->constrained()->onDelete('set null');

@@ -32,6 +32,7 @@ return new class extends Migration
             $table->bigInteger('violator_pinfl')->nullable();
             $table->string('violator_name')->nullable();
             $table->string('violator_phone')->nullable();
+            $table->text('violator_address')->after('violator_phone')->nullable();
             $table->string('assignee_name')->nullable();
             $table->string('inspector_name')->nullable();
             $table->string('crash_diameter')->nullable();

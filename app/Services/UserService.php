@@ -19,7 +19,6 @@ class UserService
 
     public function getProfile(int $pinfl)
     {
-        try {
             $token = self::getToken();
             $position = Http::withToken($token)
                 ->timeout(15)
@@ -27,8 +26,5 @@ class UserService
                     'pin' => $pinfl
                 ]);
             return $position->json();
-        } catch (\Exception $exception) {
-            throw new \Exception('Serviceda Xatolik');
-        }
     }
 }

@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Ruziev',
             'role_id' => 4,
             'login' => 'shahzod',
-            'phone' => '998337071727998337071727',
+            'phone' => '998337071727',
             'pinfl' => 31703975270028,
             'status' => true,
             'region_id' => 1,

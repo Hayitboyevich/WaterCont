@@ -115,6 +115,7 @@ class UserController extends BaseController
             $user = User::query()->findOrFail(request('id'));
             $user->phone = null;
             $user->pinfl = null;
+            $user->status = false;
             $user->save();
 
             $user->delete();
