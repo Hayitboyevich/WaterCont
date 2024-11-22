@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Organization;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,7 +25,12 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ProtocolStatusSeeder::class,
-            ProtocolTypeSeeder::class
+            ProtocolTypeSeeder::class,
+            BuildingTypeSeeder::class,
+            ConsumerSeeder::class,
+            MeasureSeeder::class,
+            OrganizationSeeder::class,
+            StandartNormSeeder::class
         ]);
     }
 }

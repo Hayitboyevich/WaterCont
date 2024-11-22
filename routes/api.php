@@ -51,6 +51,11 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('protocol-type', [InformationController::class, 'getProtocolType']);
     Route::get('smz', [InformationController::class, 'getSMZ']);
     Route::get('debit', [InformationController::class, 'getDebit']);
+    Route::get('organizations', [InformationController::class, 'getOrganizations']);
+    Route::get('measures', [InformationController::class, 'getMeasures']);
+    Route::get('standard-norms', [InformationController::class, 'getStandardNorms']);
+    Route::get('consumer', [InformationController::class, 'getConsumer']);
+    Route::get('building-types', [InformationController::class, 'getBuildingTypes']);
 
 
     Route::get('roles', [RoleController::class, 'index']);

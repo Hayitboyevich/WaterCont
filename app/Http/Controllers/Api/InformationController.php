@@ -8,10 +8,15 @@ use App\Http\Resources\DebitResource;
 use App\Http\Resources\ProtocolTypeResource;
 use App\Http\Resources\SMZResource;
 use App\Http\Resources\WellStatusResource;
+use App\Models\BuildingType;
+use App\Models\Consumer;
 use App\Models\CounterInfo;
 use App\Models\Debit;
+use App\Models\Measure;
+use App\Models\Organization;
 use App\Models\ProtocolType;
 use App\Models\SMZ;
+use App\Models\StandartNorm;
 use App\Models\WellStatus;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,4 +47,34 @@ class InformationController extends BaseController
     {
         return $this->sendSuccess(DebitResource::collection(Debit::all()), 'Debit');
     }
+
+    public function getOrganizations(): JsonResponse
+    {
+        $organizations = Organization::query()->select('id', 'name')->get();
+        return $this->sendSuccess($organizations, 'Organizations');
+    }
+
+    public function getMeasures(): JsonResponse
+    {
+        $measures = Measure::query()->select('id', 'name')->get();
+        return $this->sendSuccess($measures, 'Measures');
+    }
+    public function getStandardNorms(): JsonResponse
+    {
+        $standardNorms = StandartNorm::query()->select('id', 'name')->get();
+        return $this->sendSuccess($standardNorms, 'Standard Norm');
+    }
+
+    public function getConsumer(): JsonResponse
+    {
+        $consumers = Consumer::query()->select('id', 'name')->get();
+        return $this->sendSuccess($consumers, 'Consumers');
+    }
+
+    public function getBuildingTypes(): JsonResponse
+    {
+        $types = BuildingType::query()->select('id', 'name')->get();
+        return $this->sendSuccess($types, 'Building Types');
+    }
+
 }

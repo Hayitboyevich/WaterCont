@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'login' => 'super-admin',
             'phone' => '998911234561',
             'pinfl' => 12345678912341,
+            'position' => 'position',
             'status' => true,
             'password' => Hash::make('super-admin')
         ]);
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
             'login' => 'kadr',
             'phone' => '998917824757',
             'pinfl' => 1234567891232,
+            'position' => 'position',
             'status' => true,
             'region_id' => 1,
             'password' => Hash::make('reskadr123')
@@ -44,6 +46,7 @@ class UserSeeder extends Seeder
             'login' => 'shaxzod',
             'phone' => '998945320044',
             'pinfl' => 21345454545453,
+            'position' => 'position',
             'status' => true,
             'region_id' => 1,
             'password' => Hash::make('shaxzod')
@@ -57,6 +60,7 @@ class UserSeeder extends Seeder
             'login' => 'shahzod',
             'phone' => '998337071727',
             'pinfl' => 31703975270028,
+            'position' => 'position',
             'status' => true,
             'region_id' => 1,
             'password' => Hash::make('shaxzod')
