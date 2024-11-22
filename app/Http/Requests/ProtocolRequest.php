@@ -61,7 +61,7 @@ class ProtocolRequest extends FormRequest
             'crash_participants_count' => 'sometimes|nullable|string',
             'crash_technic_count' => 'sometimes|nullable|string',
             'images.*' => 'sometimes|array',
-            'wells.*' => 'sometimes|array',
+            'wells' => 'sometimes|array',
         ];
     }
 
