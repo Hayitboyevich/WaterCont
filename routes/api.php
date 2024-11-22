@@ -33,6 +33,7 @@ Route::post('auth-login', [LoginController::class, 'auth']);
 Route::post('send-sms', [UserController::class, 'sendSms']);
 
 
+
 Route::group(['middleware' => ['auth:api']], function() {
 
     Route::post('logout', [LoginController::class, 'logout']);

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Http\Resources\CounterInfoResource;
 use App\Http\Resources\DebitResource;
 use App\Http\Resources\ProtocolTypeResource;
@@ -19,8 +18,6 @@ use App\Models\SMZ;
 use App\Models\StandartNorm;
 use App\Models\WellStatus;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Js;
 
 class InformationController extends BaseController
 {
