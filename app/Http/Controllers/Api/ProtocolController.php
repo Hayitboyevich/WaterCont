@@ -82,8 +82,6 @@ class ProtocolController extends BaseController
 
     public function create(ProtocolRequest $request): JsonResponse
     {
-
-
         DB::beginTransaction();
         try {
             $protocol = $this->service->saveProtocol($request);

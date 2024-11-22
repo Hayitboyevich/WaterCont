@@ -60,8 +60,8 @@ class ProtocolRequest extends FormRequest
             'crash_hour' => 'sometimes|nullable|string',
             'crash_participants_count' => 'sometimes|nullable|string',
             'crash_technic_count' => 'sometimes|nullable|string',
-            'images.*' => 'sometimes|nullable|image|mimes:jpg,jpeg,png',
-            'wells.*' => 'sometimes|nullable',
+            'images.*' => 'sometimes|array',
+            'wells.*' => 'sometimes|array',
         ];
     }
 

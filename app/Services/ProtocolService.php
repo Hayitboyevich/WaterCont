@@ -56,6 +56,13 @@ class ProtocolService
                     'amount' => $item['amount'],
                     'fixed_date' => $item['fixed_date'],
                 ]);
+
+                if (!empty($item['images'])) {
+                    foreach ($item['images'] as $image) {
+                        $path = $image->store('well/images', 'public');
+                        $well->images()->create(['url' => $path]);
+                    }
+                }
             }
         }
         return $protocol;

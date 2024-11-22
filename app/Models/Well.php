@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Well extends Model
 {
@@ -15,6 +16,11 @@ class Well extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(WellStatus::class, 'well_status_id');
+    }
+
+    public function images(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     public function counterInfo(): BelongsTo
