@@ -32,6 +32,9 @@ Route::post('login', [LoginController::class, 'login']);
 Route::post('auth-login', [LoginController::class, 'auth']);
 Route::post('send-sms', [UserController::class, 'sendSms']);
 
+Route::get('info', function (){
+    return \App\Models\BuildingType::query()->select(['id', 'name'])->get();
+});
 
 
 Route::group(['middleware' => ['auth:api']], function() {

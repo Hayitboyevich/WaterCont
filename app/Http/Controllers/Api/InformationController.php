@@ -47,30 +47,30 @@ class InformationController extends BaseController
 
     public function getOrganizations(): JsonResponse
     {
-        $organizations = Organization::query()->select('id', 'name')->get();
+        $organizations = Organization::query()->select(['id', 'name'])->get();
         return $this->sendSuccess($organizations, 'Organizations');
     }
 
     public function getMeasures(): JsonResponse
     {
-        $measures = Measure::query()->select('id', 'name')->get();
+        $measures = Measure::query()->select(['id', 'name'])->get();
         return $this->sendSuccess($measures, 'Measures');
     }
     public function getStandardNorms(): JsonResponse
     {
-        $standardNorms = StandartNorm::query()->select('id', 'name')->get();
+        $standardNorms = StandartNorm::query()->select(['id', 'name'])->get();
         return $this->sendSuccess($standardNorms, 'Standard Norm');
     }
 
     public function getConsumer(): JsonResponse
     {
-        $consumers = Consumer::query()->select('id', 'name')->get();
+        $consumers = Consumer::query()->select(['id', 'name'])->get();
         return $this->sendSuccess($consumers, 'Consumers');
     }
 
     public function getBuildingTypes(): JsonResponse
     {
-        $types = BuildingType::query()->select('id', 'name')->get();
+        $types = BuildingType::query()->select(['id', 'name'])->get();
         return $this->sendSuccess($types, 'Building Types');
     }
 
