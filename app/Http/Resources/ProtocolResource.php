@@ -39,7 +39,7 @@ class ProtocolResource extends JsonResource
             'assignee_name' => $this->assignee_name,
             'inspector_name' => $this->inspector_name,
             'wells' => WellResource::collection($this->wells),
-            'protocol_type' => ProtocolTypeResource::make($this->protocol_type),
+            'protocol_type' => ProtocolTypeResource::make($this->protocolType),
             'crash_diameter' => $this->crash_diameter,
             'crash_hour' => $this->crash_hour,
             'crash_participants_count' => $this->crash_participants_count,
