@@ -71,4 +71,29 @@ class Protocol extends Model
     {
         return $this->hasMany(Well::class);
     }
+
+    public function consumer(): BelongsTo
+    {
+        return $this->belongsTo(Consumer::class, 'consumer_id');
+    }
+
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class, 'organization_id');
+    }
+
+    public function measure(): BelongsTo
+    {
+        return $this->belongsTo(Measure::class, 'measure_id');
+    }
+
+    public function standartNorm(): BelongsTo
+    {
+        return $this->belongsTo(StandartNorm::class, 'standart_norm_id');
+    }
+
+    public function buildingType(): BelongsTo
+    {
+        return $this->belongsTo(BuildingType::class, 'building_type_id');
+    }
 }

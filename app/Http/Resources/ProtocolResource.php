@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -44,6 +45,19 @@ class ProtocolResource extends JsonResource
             'crash_hour' => $this->crash_hour,
             'crash_participants_count' => $this->crash_participants_count,
             'crash_technic_count' => $this->crash_technic_count,
+            'consumer' => ConsumerResource::make($this->consumer),
+            'building_type' => BuildingTypeResource::make($this->buildingType),
+            'organization' => OrganizationResource::make($this->organization),
+            'measure' => MeasureResource::make($this->measure),
+            'standart_norm' => StandartNormResource::make($this->standartNorm),
+            'laboratory_report' => $this->laboratory_report,
+            'laboratory_report_indicator' => $this->laboratory_report_indicator,
+            'technical_specifications' => $this->technical_specifications,
+            'billing' => $this->billing,
+            'contract_information' => $this->contract_information,
+            'contract_requirements' => $this->contract_requirements,
+            'billing_subscriber' => $this->billing_subscriber,
+            'technical_requirements' => $this->technical_requirements,
             'comment' => $this->comment,
             'rejected_comment' => $this->rejected_comment,
             'rejected_by' => $this->rejected_by,
