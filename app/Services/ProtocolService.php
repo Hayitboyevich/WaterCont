@@ -59,7 +59,7 @@ class ProtocolService
                     'bactericidal_device_defective' => $item['bactericidal_device_defective'] ?? null,
                     'other_device_effective' => $item['other_device_effective'] ?? null,
                     'other_device_defective' => $item['other_device_defective'] ?? null,
-                    'not_device' => $item['not_device'] ?? null,
+                    'not_device' => $item['not_device'] ?? false,
                     'smz_id' => $item['smz_id'],
                     'debit_id' => $item['debit_id'],
                     'repression_id' => $item['repression_id'],
